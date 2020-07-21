@@ -7,7 +7,8 @@
 		"mongo": true
 	},
 	"extends": [
-		"standard"
+		"standard",
+		"eslint:recommended"
 	],
 	"parserOptions": {
 		"ecmaVersion": 11,
@@ -16,5 +17,7 @@
 		}
 	},
 	"rules": {
+		"indent": ["error", 2],
+		"quotes": ["error", "double"]
 	}
 }
