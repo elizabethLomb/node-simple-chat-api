@@ -7,13 +7,13 @@
     "start": "node app.js",
     "dev": "nodemon -e hbs,js,css app.js",
     "seeds": "node ./bin/seeds",
-    "test": "jest --detectOpenHandles --watchAll"
+    "test": "jest",
+    "test:watch": "jest --detectOpenHandles --watchAll"
   },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "npm test && git push",
-      "...": "..."
+      "pre-push": "lint-staged && npm test"
     }
   },
   "lint-staged": {
