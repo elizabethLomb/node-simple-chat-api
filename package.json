@@ -7,14 +7,26 @@
     "start": "node app.js",
     "dev": "nodemon -e hbs,js,css app.js",
     "seeds": "node ./bin/seeds",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "eslint": "./node_modules/.bin/eslint --ignore-path .gitignore . --fix"
+    "test": "jest"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run test",
+      "pre-commit": "lint-staged",
       "pre-push": "npm test"
     }
+  },
+  "lint-staged": {
+    "**/*": [
+      "./node_modules/.bin/eslint --ignore-path .gitignore . --fix",
+      "prettier --write ."
+    ]
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/public"
+    ]
   },
   "author": "Elizabeth Lombardi",
   "license": "ISC",
@@ -30,12 +42,18 @@
   },
   "devDependencies": {
     "eslint": "^7.4.0",
+    "eslint-config-prettier": "^6.11.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "husky": "^4.2.5",
-    "nodemon": "^2.0.4"
+    "jest": "^26.1.0",
+    "lint-staged": "^10.2.11",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.0.5",
+    "supertest": "^4.0.2"
   }
 }

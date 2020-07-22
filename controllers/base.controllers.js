@@ -1,3 +1,3 @@
 module.exports.base = (req, res, next) => {
-  res.json({})
-}
+  res.status(200).json({});
+};
