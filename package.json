@@ -7,7 +7,7 @@
     "start": "node app.js",
     "dev": "nodemon -e hbs,js,css app.js",
     "seeds": "node ./bin/seeds",
-    "test": "jest"
+    "test": "jest --detectOpenHandles --watchAll"
   },
   "husky": {
     "hooks": {
