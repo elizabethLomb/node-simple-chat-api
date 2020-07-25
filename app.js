@@ -12,10 +12,12 @@ const path = require('path');
  * Configure express
  */
 const app = express();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 // CORS on ExpressJS crossorigin problems
@@ -72,8 +74,15 @@ app.use((error, req, res, next) => {
 /**
  * Listen on provided port
  */
+io.on('connection', () => {
+  console.log('a user is connected');
+});
+
+/**
+ * Listen on provided port
+ */
 const port = normalizePort(process.env.PORT || '0.0.0.0');
-app.listen(port, () => {
+http.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
