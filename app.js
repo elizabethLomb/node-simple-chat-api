@@ -86,6 +86,10 @@ http.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
+io.on('connection', () => {
+  console.log('a user is connected');
+});
+
 /**
  * Normalize a port into a number, string, or false.
  */
