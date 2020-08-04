@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const favicon = require('serve-favicon');
 const path = require('path');
+const session = require('./config/session.config');
 
 /**
  * Configure express
@@ -19,6 +20,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(session);
 
 // CORS on ExpressJS crossorigin problems
 app.use((req, res, next) => {
@@ -27,6 +29,11 @@ app.use((req, res, next) => {
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept',
   );
+  next();
+});
+
+app.use((req, res, next) => {
+  req.currentUser = req.session.user;
   next();
 });
 

@@ -1,12 +1,16 @@
 const mongoose = require('mongoose');
 
 const messageSchema = new mongoose.Schema({
-  name: {
+  user: {
     type: String,
+    id: String,
     required: true,
   },
   message: {
-    type: String,
+    type: 'gif',
+    id: String,
+    slug: String,
+    url: String,
     required: true,
   },
 });
