@@ -1,16 +1,24 @@
 require('dotenv');
 
 const mongoose = require('mongoose');
+const MONGODB_URI =
+  process.env.MONGODB_URI || 'mongodb://localhost:27017/chat-api';
 
-const MONGO_URI =
-  process.env.MONGO_URI || 'mongodb://localhost:27017/node-chat-api';
+mongoose
+  .connect(MONGODB_URI, { useNewUrlParser: true })
+  .then(() =>
+    console.info(`Successfully connected to the database ${MONGODB_URI}`),
+  )
+  .catch(error =>
+    console.error(
+      `An error ocurred trying to connect to de database ${MONGODB_URI}`,
+      error,
+    ),
+  );
 
-mongoose.connect(MONGO_URI);
-
-mongoose.connection.on('connected', () => {
-  console.info(`Connected to database: ${MONGO_URI}`);
-});
-
-mongoose.connection.on('error', error => {
-  console.error('Database connection error:', error);
+process.on('SIGINT', function () {
+  mongoose.connection.close(function () {
+    console.log('Mongoose disconnected on app termination');
+    process.exit(0);
+  });
 });
